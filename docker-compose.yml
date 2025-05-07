@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:17-alpine
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${SQL_USER} -d ${SQL_DATABASE}"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/pgdata
+    env_file:
+      - .env
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_PASSWORD=${SQL_PASSWORD?Variable not set}
+      - POSTGRES_USER=${SQL_USER?Variable not set}
+      - POSTGRES_DB=${SQL_DATABASE?Variable not set}
+
+  web:
+    build: .
+    # command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+  
+volumes:
+  postgres_data:
