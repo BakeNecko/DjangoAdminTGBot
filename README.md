@@ -4,7 +4,8 @@
 
 Этот проект представляет собой веб-приложение на Django, использующее PostgreSQL в качестве базы данных. Приложение отправляет уведомления в Telegram, когда пользователь входит в админ-панель Django. Пользователи могут подписываться и отписываться от уведомлений через Telegram.
 
-BotLink: `https://t.me/DjangoAdminBakeNeckoTestBot`
+## Ссылка на бота:
+`https://t.me/DjangoAdminBakeNeckoTestBot`
 
 ## Технологии
 
